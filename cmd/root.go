@@ -1,24 +1,34 @@
-/*
-Copyright © 2024 kushalsubedi <kushalsubedi20@gmail.com>
-*/
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
 )
 
+// Define the green ASCII art for suSSH
+const greenAsciiArt = `
+ #####   ##   ##            ##       ##      
+##   ##  ##   ##            ##       ##      
+##       ##   ##    #####   #####    #####   
+ #####   ##   ##   ##       ##  ##   ##  ##  
+     ##  ##   ##    ####    ##  ##   ##  ##  
+##   ##  ##   ##       ##   ##  ##   ##  ##  
+ #####    #####    #####    ##  ##   ##  ##  
+          
+
+`
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "suSSH",
 	Short: "suSSH is a simple utility to manage your SSH keys",
-	Long: ` suSSH is a powerful, user-friendly SSH management tool designed to make your life easier. 
-	Whether you're juggling multiple servers, keys,
-	 or configurations, suSSH brings simplicity, speed, and style to your command line.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	Long:  greenAsciiArt + `suSSH is a simple utility to manage your SSH keys. It allows you to add, list, and remove SSH profiles.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println(greenAsciiArt)
+		// Add your default action here if needed
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -30,16 +40,8 @@ func Execute() {
 	}
 }
 
-
-
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.suSSH.yaml)")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
+	// Define any flags or configuration settings here
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
 }
