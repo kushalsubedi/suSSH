@@ -3,10 +3,10 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"os"
-	"path/filepath"
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/spf13/cobra"
+	"os"
+	"path/filepath"
 )
 
 // Profile struct represents an SSH profile
@@ -16,7 +16,6 @@ type Profile struct {
 	KeyPath  string `json:"keypath"`
 }
 
-// AddProfile adds a new profile to the ssh-config.json file
 func AddProfile(profile Profile) error {
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
@@ -103,6 +102,10 @@ var addCmd = &cobra.Command{
 			survey.AskOne(prompt, &keyPath, survey.WithValidator(survey.Required))
 		}
 
+		if hostName == "" || hostIP == "" || keyPath == "" { // Validate flags
+			fmt.Println("❌ All flags are required.")
+			os.Exit(1)
+		}
 		profile := Profile{
 			HostName: hostName,
 			HostIP:   hostIP,
@@ -121,7 +124,7 @@ func init() {
 	// Define flags for the add command
 	addCmd.Flags().StringP("hostname", "n", "", "Hostname for the SSH profile")
 	addCmd.Flags().StringP("hostip", "i", "", "Host IP address for the SSH profile")
-	addCmd.Flags().StringP("keypath", "k", "", "Path to the SSH key file")
+	addCmd.Flags().StringP("keypath", "k", "", "Path to the SSH key filepath")
 
 	// Add the add command to the root command
 	rootCmd.AddCommand(addCmd)

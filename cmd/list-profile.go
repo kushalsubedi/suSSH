@@ -13,7 +13,7 @@ import (
 
 // ListProfileCmd represents the list-profile command
 var listProfileCmd = &cobra.Command{
-	Use:   "list-profile",
+	Use:   "ls",
 	Short: "List all SSH profiles",
 	Long:  "List all SSH profiles and allow selection using arrow keys. Selecting a profile will initiate an SSH login.",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -89,6 +89,9 @@ func LoginToInstance(profile Profile) {
 	// Construct SSH command
 	permissionCMD := exec.Command("chmod", "400", profile.KeyPath)
 	sshCmd := exec.Command("ssh", "-i", profile.KeyPath, fmt.Sprintf("ubuntu@%s", profile.HostIP))
+
+	// add loading with emoji
+	fmt.Println("🚀 Logging in to", profile.HostName)
 
 	// Set the command to use the user's current terminal
 	sshCmd.Stdout = os.Stdout

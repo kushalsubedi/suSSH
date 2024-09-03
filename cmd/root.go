@@ -46,12 +46,19 @@ const greenAsciiArt = `
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "suSSH",
-	Short: "suSSH is a simple utility to manage your SSH keys",
-	Long:  greenAsciiArt + "suSSH is a simple utility to manage your SSH keys. It allows you to add, list, and remove SSH profiles.",
+	Use:   "sus",
+	Short: "sus (suSSH) is a simple utility to manage your SSH keys",
+	Long:  `sus (suSSH) is a simple utility to manage your SSH keys and profiles.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(greenAsciiArt)
-		// Add your default action here if needed
+		fmt.Print(greenAsciiArt)
+		fmt.Println("\n Welcome to suSSH! 🚀")
+		fmt.Println("Type 'sus --help' to see available commands.")
+
+		// If no arguments are provided, print the help message
+		if len(args) == 0 {
+			cmd.Help()
+		}
+
 	},
 }
 
