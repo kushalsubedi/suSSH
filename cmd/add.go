@@ -121,11 +121,9 @@ var addCmd = &cobra.Command{
 }
 
 func init() {
-	// Define flags for the add command
 	addCmd.Flags().StringP("hostname", "n", "", "Hostname for the SSH profile")
 	addCmd.Flags().StringP("hostip", "i", "", "Host IP address for the SSH profile")
 	addCmd.Flags().StringP("keypath", "k", "", "Path to the SSH key filepath")
 
-	// Add the add command to the root command
 	rootCmd.AddCommand(addCmd)
 }

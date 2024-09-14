@@ -10,7 +10,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// RemoveProfileCmd represents the remove-profile command
 var RemoveProfileCmd = &cobra.Command{
 	Use:   "rm",
 	Short: "Remove an SSH profile",
